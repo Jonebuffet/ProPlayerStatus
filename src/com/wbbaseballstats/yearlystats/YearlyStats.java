@@ -82,7 +82,13 @@ public class YearlyStats {
 				.withUsedHostsPerRemoteDc(2)
 				.build());
 		
-		// Pooling 
+		/**
+		 * 
+		 *  Pooling 
+		 *  This is a good working example of how Connection Pooling Options can be configured. This is a
+		 *  very simple example of how connections can be supported by a remote host.
+		 *  
+		 */
 		PoolingOptions poolingOptions = new PoolingOptions()
 				.setConnectionsPerHost(HostDistance.LOCAL, 1, 3)
 				.setConnectionsPerHost(HostDistance.REMOTE, 1, 1);

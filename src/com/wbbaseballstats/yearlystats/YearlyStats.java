@@ -64,7 +64,7 @@ public class YearlyStats {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DseSession session = createConnection();
-		//createKeyspaceAndTables(session);
+		createKeyspaceAndTables(session);
 		//insertData(session);
 		
 		readData(session);

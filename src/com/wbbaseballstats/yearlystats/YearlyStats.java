@@ -95,7 +95,7 @@ public class YearlyStats {
 
 		// Create cluster instances
 		cluster = DseCluster.builder()
-				   .addContactPoints(new String[] {"52.34.59.49"})
+				   .addContactPoints(new String[] {"34.222.229.108"})
 				   .withClusterName("Test Cluster")
 				   .withLoadBalancingPolicy(policy)
 				   .withPort(9042)

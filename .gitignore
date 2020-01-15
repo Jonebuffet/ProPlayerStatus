@@ -6,7 +6,7 @@ in/
 
 # Log file
 *.log
-
+/Users/johnwalker/projects/baseball/WBBaseballStats/data/Scripts/logs/*.log
 # BlueJ files
 *.ctxt
 

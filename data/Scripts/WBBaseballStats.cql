@@ -27,6 +27,10 @@ CREATE TABLE IF NOT EXISTS ks_baseball.player_batting_by_year (
     stint int,
     teamid text,
     triples int,
+    obp decimal, 
+    slg decimal,
+    ops decimal,
+    ops_plus decimal,
     PRIMARY KEY (playerid, yearid));
 
 CREATE TABLE IF NOT EXISTS ks_baseball.player_info (

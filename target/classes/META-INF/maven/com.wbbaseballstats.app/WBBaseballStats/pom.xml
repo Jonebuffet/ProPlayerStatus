@@ -1,96 +1,86 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.wbbaseballstats.app</groupId>
   <artifactId>WBBaseballStats</artifactId>
-  <version>0.1-SNAPSHOT</version>
-  <name>WBBaseballStatsProj</name>
-         <properties>
-           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-           <dse.driver.version>1.7.0</dse.driver.version>
-           <dse.version>6.0.1</dse.version>
-      	   <scala.version>2.11.8</scala.version>
-           <scala.main.version>2.11</scala.main.version>
-           <cassandra.version>4.0</cassandra.version>
-           <junit.version>4.12</junit.version>
-        </properties>
-	<dependencies>
-		<dependency>
-			<groupId>com.datastax.dse</groupId>
-			<artifactId>dse-java-driver-core</artifactId>
-			<version>${dse.driver.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.datastax.dse</groupId>
-			<artifactId>dse-java-driver-mapping</artifactId>
-			<version>${dse.driver.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.9</version>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>1.18.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-servlet</artifactId>
-			<version>1.18.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>1.18.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>1.18.1</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.datastax.spark</groupId>
-		    <artifactId>spark-cassandra-connector_2.11</artifactId>
-		    <version>2.4.0</version>
-		</dependency>
-		<dependency>
-            <groupId>org.apache.spark</groupId>
-    		<artifactId>spark-core_2.11</artifactId>
-    		<version>2.3.4</version>
-		</dependency>
-		<dependency>
-    		<groupId>org.apache.spark</groupId>
-    		<artifactId>spark-sql_2.11</artifactId>
-    		<version>2.3.4</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.spark</groupId>
-		    <artifactId>spark-tags_2.11</artifactId>
-		    <version>2.0.0-preview</version>
-		</dependency>
-        <dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+  <version>0.1</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <dse.version>6.7.6</dse.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.datastax.dse</groupId>
+      <artifactId>dse-spark-dependencies</artifactId>
+      <version>${dse.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- Your dependencies, 'provided' are not included in jar -->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.commons</groupId>-->
+      <!--<artifactId>commons-math3</artifactId>-->
+      <!--<version>3.6.1</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.commons</groupId>-->
+      <!--<artifactId>commons-csv</artifactId>-->
+      <!--<version>1.0</version>-->
+    <!--</dependency>-->
+  
+<!-- <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.0.9</version>
+     </dependency> -->
+  </dependencies> 
+
+  <repositories>
+    <repository>
+      <id>DataStax-Repo</id>
+      <url>https://repo.datastax.com/public-repos/</url>
+    </repository>
+  </repositories>
+
   <build>
-    <sourceDirectory>src</sourceDirectory>
+  	<resources>
+  		<resource>
+  			<directory>src/main/resources</directory>
+  		</resource>
+  	</resources>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
+        <version>3.5.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <!--<relocations>-->
+                <!--<relocation>-->
+                <!--<pattern>org.apache.commons.csv</pattern>-->
+                <!--<shadedPattern>shaded.org.apache.commons.csv</shadedPattern>-->
+                <!--</relocation>-->
+              <!--</relocations>-->
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

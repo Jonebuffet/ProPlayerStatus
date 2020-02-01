@@ -45,12 +45,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 */
-//import scala.runtime.*;
-//import scala.Tuple2;
-//import scala.runtime.AbstractFunction1;
+import scala.runtime.*;
+import scala.Tuple2;
+import scala.runtime.AbstractFunction1;
 
 //import java.util.concurrent.TimeUnit;
 import java.text.DecimalFormat;
+
 
 /**
  * @author John Walker
@@ -95,7 +96,7 @@ public class YearlyStats {
 
 		// Create cluster instances
 		cluster = DseCluster.builder()
-				   .addContactPoints(new String[] {"34.222.229.108"})
+				   .addContactPoints(new String[] {"34.223.206.174"})
 				   .withClusterName("Test Cluster")
 				   .withLoadBalancingPolicy(policy)
 				   .withPort(9042)

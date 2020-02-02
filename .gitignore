@@ -9,6 +9,7 @@ in/
 /Users/johnwalker/projects/baseball/WBBaseballStats/data/Scripts/logs/*.log
 # BlueJ files
 *.ctxt
+*orig
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
